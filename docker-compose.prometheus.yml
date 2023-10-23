@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    container_name: prometheus
+    volumes:
+      - ./data/prometheus/core:/etc/prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yaml"
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+    restart: always
+
+  node_exporter:
+    image: prom/node-exporter:${NODE_EXPORTER_VERSION}
+    container_name: node_exporter
+    ports:
+      - "${NODE_EXPORTER_PORT}:9100"
+    restart: always
+
+  alertmanager:
+    image: prom/alertmanager:${ALERTMANAGER_VERSION}
+    volumes:
+      - ./data/prometheus/alertmanager:/etc/alertmanager
+    command: "--config.file=/etc/alertmanager/config.yaml"
+    ports:
+      - "${ALERTMANAGER_PORT}:9093"
+    restart: always
+
+  blackbox_exporter:
+    image: prom/blackbox-exporter:${BLACKBOX_EXPORTER_VERSION}
+    container_name: blackbox_exporter
+    ports:
+      - "${BLACKBOX_EXPORTER_PORT}:9115"
+    restart: always
+    volumes:
+      - ./data/prometheus/blackbox_exporter/config.yml:/etc/blackbox_exporter/config.yml
