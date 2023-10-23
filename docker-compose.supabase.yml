@@ -23,14 +23,14 @@ services:
       - ${DOCKER_SOCKET_LOCATION}:/var/run/docker.sock:ro
     command: [ "--config", "etc/vector/vector.yml" ]
 
-  postgres:
+  supabase-postgres:
     depends_on:
       vector:
         condition: service_healthy
     image: supabase/postgres:${POSTGRES_VERSION}
-    container_name: supabase-db
+    container_name: supabase-postgres
     ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+      - ${SUPABASE_POSTGRES_PORT}:${POSTGRES_PORT}
     restart: unless-stopped
     healthcheck:
       test: pg_isready -U postgres -h localhost
@@ -45,12 +45,12 @@ services:
       - log_min_messages=fatal # prevents Realtime polling queries from appearing in logs
     environment:
       POSTGRES_HOST: /var/run/postgresql
-      PGPORT: ${POSTGRES_PORT}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      PGPASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${SUPABASE_POSTGRES_PORT}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGDATABASE: ${POSTGRES_DB}
       POSTGRES_DB: ${POSTGRES_DB}
+      PGPORT: ${POSTGRES_PORT}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB}
     volumes:
       - ./data/supabase/postgresql/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
       # Must be superuser to create event trigger
@@ -64,7 +64,7 @@ services:
 
   analytics:
     depends_on:
-      postgres:
+      supabase-postgres:
         condition: service_healthy
     image: supabase/logflare:${ANALYTICS_VERSION}
     container_name: supabase-analytics
@@ -163,7 +163,7 @@ services:
 
   auth:
     depends_on:
-      postgres:
+      supabase-postgres:
         condition: service_healthy
       analytics:
         condition: service_healthy
@@ -214,7 +214,7 @@ services:
 
   rest:
     depends_on:
-      postgres:
+      supabase-postgres:
         condition: service_healthy
       analytics:
         condition: service_healthy
@@ -233,7 +233,7 @@ services:
 
   realtime:
     depends_on:
-      postgres:
+      supabase-postgres:
         condition: service_healthy
       analytics:
         condition: service_healthy
@@ -272,7 +272,7 @@ services:
 
   meta:
     depends_on:
-      postgres:
+      supabase-postgres:
         condition: service_healthy
       analytics:
         condition: service_healthy
@@ -327,8 +327,7 @@ services:
 
   storage:
     depends_on:
-      postgres:
-        # Disable this if you are using an external Postgres database
+      supabase-postgres:
         condition: service_healthy
       rest:
         condition: service_started

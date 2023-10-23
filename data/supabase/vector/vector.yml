@@ -36,7 +36,7 @@ transforms:
       realtime: '.appname == "supabase-realtime"'
       storage: '.appname == "supabase-storage"'
       functions: '.appname == "supabase-functions"'
-      db: '.appname == "supabase-db"'
+      db: '.appname == "supabase-postgres"'
   # Ignores non nginx errors since they are related with kong booting up
   kong_logs:
     type: remap
