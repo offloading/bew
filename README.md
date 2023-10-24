@@ -8,11 +8,12 @@
 - [x] Wordpress
   - [x] MySQL
 - [x] Home-Assistant
-- [x] Prometheus
-  - [x] Grafana
 - [x] Supabase
-  - [x] PostgreSQL
+  - [ ] PostgreSQL
 - [ ] Strapi
+- [x] Prometheus
+- [x] Grafana
+- [ ] Docusaurus
 - [x] Backstage
 - [ ] ThingsBoard
 - [x] Node-RED
