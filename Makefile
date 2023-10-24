@@ -16,6 +16,9 @@ grafana:
 supabase:
 	docker compose -f docker-compose.supabase.yml up
 
+nodered:
+	docker compose -f docker-compose.nodered.yml up
+
 all:
 	docker compose \
 	-f docker-compose.yml \
@@ -24,4 +27,5 @@ all:
 	-f docker-compose.prometheus.yml \
 	-f docker-compose.grafana.yml \
 	-f docker-compose.supabase.yml \
+	-f docker-compose.nodered.yml \
 	up

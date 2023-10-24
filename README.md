@@ -15,4 +15,5 @@
 - [ ] Strapi
 - [x] Backstage
 - [ ] ThingsBoard
+- [x] Node-RED
 - [ ] Fiware
