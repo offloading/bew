@@ -27,7 +27,7 @@ services:
     depends_on:
       vector:
         condition: service_healthy
-    image: supabase/postgres:${POSTGRES_VERSION}
+    image: supabase/postgres:${SUPABASE_POSTGRES_VERSION}
     container_name: supabase-postgres
     ports:
       - ${SUPABASE_POSTGRES_PORT}:${POSTGRES_PORT}
