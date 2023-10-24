@@ -1,10 +1,18 @@
 # bew
 
+インフラ練習帳
+
 ## List
 
-- [ ] Nginx
-- [ ] Wordpress
-- [ ] Home-Assistant
-- [ ] Prometheus
-- [ ] Supabase
-- [ ] 
+- [x] Nginx
+- [x] Wordpress
+  - [x] MySQL
+- [x] Home-Assistant
+- [x] Prometheus
+  - [x] Grafana
+- [x] Supabase
+  - [x] PostgreSQL
+- [ ] Strapi
+- [ ] Backstage
+- [ ] ThingsBoard
+- [ ] Fiware
