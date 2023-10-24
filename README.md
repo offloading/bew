@@ -13,6 +13,6 @@
 - [x] Supabase
   - [x] PostgreSQL
 - [ ] Strapi
-- [ ] Backstage
+- [x] Backstage
 - [ ] ThingsBoard
 - [ ] Fiware
