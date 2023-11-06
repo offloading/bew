@@ -9,6 +9,7 @@ version: "3.8"
 services:
   node-red:
     image: nodered/node-red:latest
+    container_name: node-red
     # environment:
     #   - TZ=Europe/Amsterdam
     ports:

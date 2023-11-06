@@ -20,6 +20,7 @@ services:
 
   alertmanager:
     image: prom/alertmanager:${ALERTMANAGER_VERSION}
+    container_name: alertmanager
     volumes:
       - ./data/prometheus/alertmanager:/etc/alertmanager
     command: "--config.file=/etc/alertmanager/config.yaml"

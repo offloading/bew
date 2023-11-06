@@ -1,7 +1,10 @@
-.PHONY: up wordpress bhomeassistant prom grafana supabase nodered all alld ps alldps down
+.PHONY: up mailserver wordpress bhomeassistant prom grafana supabase nodered all alld ps alldps down
 
 up:
 	docker compose up
+
+mailserver:
+	docker compose -f docker-compose.mailserver.yml up
 
 wordpress:
 	docker compose -f docker-compose.wordpress.yml up
@@ -24,6 +27,7 @@ nodered:
 all:
 	docker compose \
 	-f docker-compose.yml \
+	-f docker-compose.mailserver.yml \
 	-f docker-compose.wordpress.yml \
 	-f docker-compose.homeassistant.yml \
 	-f docker-compose.prometheus.yml \
@@ -35,6 +39,7 @@ all:
 alld:
 	docker compose \
 	-f docker-compose.yml \
+	-f docker-compose.mailserver.yml \
 	-f docker-compose.wordpress.yml \
 	-f docker-compose.homeassistant.yml \
 	-f docker-compose.prometheus.yml \
@@ -53,6 +58,7 @@ alldps:
 down:
 	docker compose \
 	-f docker-compose.yml \
+	-f docker-compose.mailserver.yml \
 	-f docker-compose.wordpress.yml \
 	-f docker-compose.homeassistant.yml \
 	-f docker-compose.prometheus.yml \
